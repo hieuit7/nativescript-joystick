@@ -1,0 +1,18 @@
+//default elements
+android {
+   productFlavors {
+       "nativescript-joystick" {
+           dimension "nativescript-joystick"
+       }
+   }
+}
+
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
+dependencies {
+    compile 'com.github.erz05:JoyStick:a28b79922d'
+}

@@ -1,0 +1,11 @@
+demo/
+*.png
+*.log
+*.map
+*.ts
+!index.d.ts
+!mip-finder.d.ts
+!mip.d.ts
+!ble-utils.d.ts
+
+platforms/android/AndroidManifest.xml

@@ -1,0 +1,18 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded"
+  xmlns:js="nativescript-joystick">
+  <StackLayout>
+    <Label text="JoyStick" class="message" textWrap="true"/>
+    <StackLayout orientation="horizontal">
+      <js:JoyStick
+        padColor="green"
+        buttonColor="pink"
+        width="200"
+        ></js:JoyStick>
+      <js:JoyStick
+        padColor="black"
+        buttonColor="white"
+        width="200"
+        ></js:JoyStick>
+    </StackLayout>
+  </StackLayout>
+</Page>
