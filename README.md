@@ -1,76 +1,58 @@
-# Develop a NativeScript plugin now (w/ TypeScript)
+# NativeScript-JoyStick
+An Android UI component for NativeScript that provides Virtual JoyStick
+Hopefully I will be able to add iOS soon.
 
-## Getting started
+![Sample](screens/joystick.png)
 
-1. `git clone https://github.com/NathanWalker/nativescript-plugin-seed.git myplugin`
-2. `npm install -g typescript`
-3. `cd myplugin`
-2. `npm run setup`
-3. Get to work.
+## Native Source
 
-This seed expands on several things [presented here](http://developer.telerik.com/featured/creating-nativescript-plugins-in-typescript/).
+This component is based on [JoyStick component from AndroidArsenal](https://android-arsenal.com/details/1/2712) created by [erz05](https://github.com/erz05)
+
+## Installation
+From your command prompt/termial go to your app's root folder and execute:
+`tns plugin add nativescript-joystick`
 
 ## Usage
+#### XML:
+```XML
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded"
+  xmlns:js="nativescript-joystick">
+  <StackLayout>
+    <Label text="JoyStick"/>
+    
+    <Label text="{{'Angle:' + angle}}" textWrap="true" />
+    <Label text="{{'Power:' + power}}" textWrap="true" />
 
-The seed is prepared to allow you to test and try out your plugin via the `demo` folder.
-Additionally it provides a proper `.gitignore` to keep GitHub tidy as well as `.npmignore` to ensure everyone is happy when you publish your plugin via npm.
-
-### Prepare
-
-You'll want to change a couple things right away:
-
-* Change the name of the plugin all throughout `package.json` (including github repo, etc.) and the filenames.
-* Also in `package.json`, find this line:
-
-```
-"preparedemo": "npm run build; cd demo; tns plugin remove nativescript-yourplugin; tns plugin add ..; tns install",
-```
-
-Replace `nativescript-yourplugin` with your actual plugin name.
-
-### Typical development workflow:
-
-1. Make changes to plugin files
-2. Make changes in `demo` that would test those changes out
-3. `npm run demo.ios` or `npm run demo.android`  **(must be run from the root directory)**
-
-Those `demo` tasks are just general helpers. You may want to have more granular control on the device and/or emulator you want to run. For that, you can just run things the manual way:
-
-```
-cd demo
-
-// when developing, to ensure the latest code is built into the demo, it's a guarantee to remove the plugin and add it back
-tns plugin remove nativescript-yourplugin // replace with your plugin name
-tns plugin add ..
-
-// manual platform adds
-tns platform add ios
-// and/or
-tns platform add android
+    <js:JoyStick
+      padColor="green"
+      buttonColor="pink"
+      width="50%"
+      angle="{{angle}}"
+      power="{{power}}">
+    </js:JoyStick>
+  </StackLayout>
+</Page>
 ```
 
-Then use any of the available options from the `tns` command line:
+## Attributes
+**padColor - (color string)** - *optional*
 
-* [Emulate your project](https://github.com/NativeScript/nativescript-cli#emulate-your-project)
-* [Run your project](https://github.com/NativeScript/nativescript-cli#run-your-project)
-* [Full list of commands](https://github.com/NativeScript/nativescript-cli#the-commands)
+Attribute to specify the pad color to use.
+ 
+**buttonColor - (color string)** - *optional*
 
-## Publish
+Attribute to specify the button color to use.
 
-When you have everything ready to publish:
+**angle - (number)** - *optional*
 
-* Bump the version number in `package.json`
-* `npm run build` - **very important** - ensure the latest is built **before** you publish
-* `npm publish`
+Attribute to bind the button angle.
+Values range -180 to 180. Where 0: Left, 90: Up, 180 and -180: Right, -90: Down 
 
-## Contributing - Want to make the seed better?
+**angle - (number)** - *optional*
 
-Or at least help keep it up to date with NativeScript releases, which would be excellent.
+Attribute to bind the button power or how far it is from the centre.
+Values range 0 to 100. Where 0: centre, 100: at the edge.
 
-```
-npm install -g typescript  // if you don't already have it
-git clone https://github.com/NathanWalker/nativescript-plugin-seed
-cd nativescript-plugin-seed
-
-// Improve!
-```
+## Methods
+- **getPower()** - returns current Power value directly from the native component
+- **getAngle()** - returns current Angle value directly from the native component

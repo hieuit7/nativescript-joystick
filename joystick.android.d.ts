@@ -5,5 +5,4 @@ export declare class JoyStick extends JoyStickCommon {
     _createUI(): void;
     getPower(): number;
     getAngle(): number;
-    getAngleDegrees(): number;
 }

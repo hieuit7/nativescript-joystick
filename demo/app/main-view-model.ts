@@ -1,14 +1,13 @@
 import {Observable} from 'data/observable';
-import {JoyStick} from 'nativescript-joystick';
 
 export class HelloWorldModel extends Observable {
-  public message: string;
-  private joystick: JoyStick;
+
+  public angleLeft: number;
+  public angleRight: number;
+  public powerLeft: number;
+  public powerRight: number;
 
   constructor() {
     super();
-
-    //this.joystick = new JoyStick();
-    //this.message = this.joystick.message;
   }
 }

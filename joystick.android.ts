@@ -1,7 +1,8 @@
 import {Color} from "color";
-import {JoyStickCommon} from './joystick.common';
 import {PropertyMetadata} from "ui/core/proxy";
+//import {Owned} from "utils/utils";
 
+import {JoyStickCommon} from './joystick.common';
 import common = require("./joystick.common");
 global.moduleMerge(common, exports);
 
@@ -12,11 +13,37 @@ export class JoyStick extends JoyStickCommon {
 
     get android(): any {
         return this._android;
+
     }
 
     public _createUI() {
         this._android = new com.erz.joysticklibrary.JoyStick(this._context);
-        debugger;
+
+        /* Add onChange EventListener */
+        var ref = new WeakRef(this);
+        var joystick = this;
+        
+        this._android.setListener( new com.erz.joysticklibrary.JoyStick.JoyStickListener(
+            // <Owned & com.erz.joysticklibrary.JoyStick.JoyStickListener>{
+            {
+                get owner() {
+                    return ref.get();
+                },
+
+                onMove: function (nativeJoystick, angle, power) {
+                    if (this.owner) {
+                        //get the angle in Degrees
+                        angle = nativeJoystick.getAngleDegrees();
+
+                        joystick.set("angle", angle);
+                        joystick.set("power", power);
+                    }
+                    else {
+                        console.log("else");
+                    }
+                }
+            }
+        ))
     }
 
     public getPower(): number {
@@ -24,10 +51,6 @@ export class JoyStick extends JoyStickCommon {
     }
 
     public getAngle(): number {
-        return this._android.getAngle();
-    }
-
-    public getAngleDegrees(): number {
         return this._android.getAngleDegrees();
     }
 }

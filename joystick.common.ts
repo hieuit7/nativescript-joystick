@@ -1,14 +1,12 @@
-// import * as app from 'application';
-// import * as dialogs from 'ui/dialogs';
-
 import {Property} from "ui/core/dependency-observable";
 import {View} from "ui/core/view";
 import {PropertyMetadata} from "ui/core/proxy";
 import {Color} from "color";
 
 export class JoyStickCommon extends View{
-  public message: string;
-  
+  public angle: number = 0;
+  public power: number = 0;
+
   constructor() {
     super()
   }
@@ -32,14 +30,12 @@ export class JoyStickCommon extends View{
       "JoyStickCommon",
       new PropertyMetadata(false)
   );
-  get buttonColor(): Color {
+  public get buttonColor(): Color {
       return this._getValue(JoyStickCommon.buttonColorProperty);
   }
-  set buttonColor(value: Color) {
+  public set buttonColor(value: Color) {
       this._setValue(JoyStickCommon.buttonColorProperty, value);
   }
-
-  
 
   /*
 
