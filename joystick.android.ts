@@ -30,16 +30,19 @@ export class JoyStick extends JoyStickCommon {
                     return ref.get();
                 },
 
-                onMove: function (nativeJoystick, angle, power) {
+                onMove: function (nativeJoystick, angleRad, power) {
                     if (this.owner) {
                         //get the angle in Degrees
-                        angle = nativeJoystick.getAngleDegrees();
+                        var angleDegrees = nativeJoystick.getAngleDegrees();
 
-                        joystick.set("angle", angle);
+                        joystick.set("angle", angleDegrees);
                         joystick.set("power", power);
-                    }
-                    else {
-                        console.log("else");
+
+                        var horizontal = -Math.cos(angleRad) * power;
+                        var vertical = Math.sin(angleRad) * power;
+
+                        joystick.set("horizontal", horizontal);
+                        joystick.set("vertical", vertical);
                     }
                 }
             }

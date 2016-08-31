@@ -6,6 +6,8 @@ import {Color} from "color";
 export class JoyStickCommon extends View{
   public angle: number = 0;
   public power: number = 0;
+  public horizontal: number = 0;
+  public vertical: number = 0;
 
   constructor() {
     super()

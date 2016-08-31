@@ -7,6 +7,8 @@ export class HelloWorldModel extends Observable {
   public powerLeft: number;
   public powerRight: number;
 
+  public horizontal: number;
+  public vertical: number;
   constructor() {
     super();
   }

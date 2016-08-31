@@ -9,13 +9,18 @@
     <Label text="{{'Angle Right:' + angleRight}}" textWrap="true" />
     <Label text="{{'Power Right:' + powerRight}}" textWrap="true" />
 
+    <Label text="{{ 'Left Horizontal:' + horizontal }}" />
+    <Label text="{{ 'Left Vertical:' + vertical }}" />
+
     <StackLayout orientation="horizontal">
       <js:JoyStick
         padColor="green"
         buttonColor="pink"
         width="50%"
         angle="{{angleLeft}}"
-        power="{{powerLeft}}" onMove="{{onMove}}"></js:JoyStick>
+        power="{{powerLeft}}" onMove="{{onMove}}"
+        horizontal="{{horizontal}}"
+        vertical="{{vertical}}"></js:JoyStick>
       <js:JoyStick
         padColor="black"
         buttonColor="white"

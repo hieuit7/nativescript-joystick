@@ -4,6 +4,8 @@ import { Color } from "color";
 export declare class JoyStickCommon extends View {
     angle: number;
     power: number;
+    horizontal: number;
+    vertical: number;
     constructor();
     static padColorProperty: Property;
     padColor: Color;
