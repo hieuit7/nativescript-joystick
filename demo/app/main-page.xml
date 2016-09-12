@@ -1,6 +1,9 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded"
   xmlns:js="nativescript-joystick">
   <StackLayout>
+    <Button text="testMe" tap="{{testMe}}" />
+    <Button text="" tap="" />
+
     <Label text="JoyStick" class="message" textWrap="true"/>
 
     <Label text="{{'Angle Left:' + angleLeft}}" textWrap="true" />
@@ -16,15 +19,15 @@
       <js:JoyStick
         padColor="green"
         buttonColor="pink"
-        width="50%"
+        width="300"
         angle="{{angleLeft}}"
-        power="{{powerLeft}}" onMove="{{onMove}}"
         horizontal="{{horizontal}}"
-        vertical="{{vertical}}"></js:JoyStick>
+        vertical="{{vertical}}"
+        power="{{powerLeft}}"></js:JoyStick>
       <js:JoyStick
         padColor="black"
         buttonColor="white"
-        width="50%"
+        width="300"
         angle="{{angleRight}}" 
         power="{{powerRight}}"></js:JoyStick>
     </StackLayout>

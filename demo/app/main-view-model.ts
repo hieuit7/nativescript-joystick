@@ -9,7 +9,9 @@ export class HelloWorldModel extends Observable {
 
   public horizontal: number;
   public vertical: number;
+  
   constructor() {
     super();
   }
+
 }
