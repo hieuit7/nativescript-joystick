@@ -2,7 +2,6 @@
   xmlns:js="nativescript-joystick">
   <StackLayout>
     <Button text="testMe" tap="{{testMe}}" />
-    <Button text="" tap="" />
 
     <Label text="JoyStick" class="message" textWrap="true"/>
 
@@ -19,7 +18,8 @@
       <js:JoyStick
         padColor="green"
         buttonColor="pink"
-        width="300"
+        width="200"
+        height="200"
         angle="{{angleLeft}}"
         horizontal="{{horizontal}}"
         vertical="{{vertical}}"
@@ -27,7 +27,7 @@
       <js:JoyStick
         padColor="black"
         buttonColor="white"
-        width="300"
+        width="40%"
         angle="{{angleRight}}" 
         power="{{powerRight}}"></js:JoyStick>
     </StackLayout>

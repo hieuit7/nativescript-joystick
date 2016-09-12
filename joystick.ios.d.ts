@@ -9,7 +9,5 @@ export declare class JoyStick extends JoyStickCommon {
     private updateAngle(angleRad);
     updatePadColor(color: Color): void;
     updateStickColor(color: Color): void;
-    alignSize(): void;
-    updatePadSize(size: number): void;
-    updateStickSize(size: number): void;
+    updateSize(size: any): void;
 }
