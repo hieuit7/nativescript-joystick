@@ -1,12 +1,16 @@
 # NativeScript-JoyStick
-An Android UI component for NativeScript that provides Virtual JoyStick
-Hopefully I will be able to add iOS soon.
+An Android and iOS UI component for NativeScript that provides Virtual JoyStick
 
-![Sample](screens/joystick.png)
+![Sample Android](screens/joystick.png)![Sample iOS](screens/joystick-ios.gif)
 
 ## Native Source
 
+### Android
 This component is based on [JoyStick component from AndroidArsenal](https://android-arsenal.com/details/1/2712) created by [erz05](https://github.com/erz05)
+
+### iOS
+This component is based on [JoyStick component from cocoapods](https://cocoapods.org/pods/CDJoystick) created by [Cole Dunsby](https://cocoapods.org/owners/9940)
+And then modified to work better with Objective C, into [JoyStick another cocoapod](https://cocoapods.org/pods/CCDJoystick) by [tzraikov](https://github.com/tzraikov)
 
 ## Installation
 From your command prompt/termial go to your app's root folder and execute:
