@@ -7,7 +7,7 @@ import {JoyStickCommon} from './joystick.common';
 import common = require("./joystick.common");
 global.moduleMerge(common, exports);
 
-declare var  CDJoystick, interop;
+declare var  CCDJoystick, interop;
 
 export class JoyStick extends JoyStickCommon {
     private _ios: any = null;
@@ -26,7 +26,7 @@ export class JoyStick extends JoyStickCommon {
     public _createUI() {
         var size = 200;
 
-        var joystick = new CDJoystick();
+        var joystick = new CCDJoystick();
         this._ios = joystick;
 
         joystick.frame = CGRectMake(0, 0, size, size);

@@ -1,1 +1,1 @@
-pod "CDJoystick"
+pod 'CCDJoystick', :git => 'https://github.com/tzraikov/CCDJoystick.git'
