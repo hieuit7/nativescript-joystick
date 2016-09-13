@@ -59,17 +59,17 @@ Values range -180 to 180. Where 0: Left, 90: Up, 180 and -180: Right, -90: Down
 **power - (number)** - *optional*
 
 Attribute (read only) to bind the button power or how far it is from the centre.
-Values range 0 to 100. Where 0: centre, 100: at the edge.
+Values range 0 to 1. Where 0: centre, 1: at the edge.
 
 **horizontal - (number)** - *optional*
 
 Attribute (read only) to bind the horizontal position of the button.
-Values range -100 to 100. Where 0: centre, -100: left, 100: right.
+Values range -1 to 1. Where 0: centre, -1: left, 1: right.
 
 **vertical - (number)** - *optional*
 
 Attribute (read only) to bind the vertical position of the button.
-Values range -100 to 100. Where 0: centre, -100: down, 100: up.
+Values range -1 to 1. Where 0: centre, -1: down, 1: up.
 
 ## Methods
 - **getPower()** - returns current Power value directly from the native component

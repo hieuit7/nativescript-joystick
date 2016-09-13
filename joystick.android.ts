@@ -35,6 +35,9 @@ export class JoyStick extends JoyStickCommon {
                         //get the angle in Degrees
                         var angleDegrees = nativeJoystick.getAngleDegrees();
 
+                        //change power, so that all units are between -1 and 1
+                        power /= 100;
+
                         joystick.set("angle", angleDegrees);
                         joystick.set("power", power);
 

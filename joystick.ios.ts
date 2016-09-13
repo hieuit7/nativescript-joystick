@@ -51,7 +51,7 @@ export class JoyStick extends JoyStickCommon {
             var y = nspointstr.substring( nspointstr.indexOf(",")+2, nspointstr.indexOf("}") );
 
             // Update the observable attributes
-            this.updateAttributes(x*100, -y*100);
+            this.updateAttributes(x, -y);
         }
     }
 
@@ -78,7 +78,7 @@ export class JoyStick extends JoyStickCommon {
 
     private calculatePower(x, y): number {
         var power = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-        return (power > 100) ? 100 : power;
+        return (power > 1) ? 1 : power;
     }
 
     private calculateAngle(x: number, y: number): number {
