@@ -1,8 +1,9 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded"
   xmlns:js="nativescript-joystick">
-  <StackLayout>
-    <Label text="JoyStick" class="message" />
-
+  <Page.actionBar>
+    <ActionBar class="action-bar" title="JoyStick"></ActionBar>
+  </Page.actionBar>
+  <StackLayout margin="10">
     <Label text="{{'Angle Left:' + angleLeft}}" textWrap="true" />
     <Label text="{{'Power Left:' + powerLeft}}" textWrap="true" />
 
@@ -11,8 +12,6 @@
 
     <Label text="{{'Angle Right:' + angleRight}}" textWrap="true" />
     <Label text="{{'Power Right:' + powerRight}}" textWrap="true" />
-
-
 
     <StackLayout orientation="horizontal">
       <js:JoyStick
