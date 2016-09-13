@@ -51,7 +51,7 @@ export class JoyStick extends JoyStickCommon {
             var y = nspointstr.substring( nspointstr.indexOf(",")+2, nspointstr.indexOf("}") );
 
             // Update the observable attributes
-            this.updateAttributes(x, y);
+            this.updateAttributes(x*100, -y*100);
         }
     }
 
@@ -81,7 +81,7 @@ export class JoyStick extends JoyStickCommon {
     }
 
     private calculateAngle(x: number, y: number): number {
-        return Math.atan2(-y, -x) * 180 / Math.PI;
+        return Math.atan2(y, -x) * 180 / Math.PI;
     }
 
     public updatePadColor(color: Color) {
