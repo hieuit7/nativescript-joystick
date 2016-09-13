@@ -26,6 +26,8 @@ From your command prompt/termial go to your app's root folder and execute:
     
     <Label text="{{'Angle:' + angle}}" textWrap="true" />
     <Label text="{{'Power:' + power}}" textWrap="true" />
+    <Label text="{{'Horizontal:' + horizontal}}" textWrap="true" />
+    <Label text="{{'Vertical:' + vertical}}" textWrap="true" />
 
     <js:JoyStick
       padColor="green"
