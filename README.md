@@ -1,7 +1,7 @@
 # NativeScript-JoyStick
 An Android and iOS UI component for NativeScript that provides Virtual JoyStick
 
-![Sample Android](screens/joystick.png)![Sample iOS](screens/joystick-ios.gif)
+![Sample Android](screens/joystick-android.png)![Sample iOS](screens/joystick-ios.gif)
 
 ## Native Source
 
