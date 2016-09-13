@@ -1,6 +1,7 @@
 import {Color} from "color";
 import {PropertyMetadata} from "ui/core/proxy";
 import utils = require("utils/utils");
+import {View} from "ui/core/view";
 
 import {JoyStickCommon} from './joystick.common';
 import common = require("./joystick.common");
@@ -8,33 +9,8 @@ global.moduleMerge(common, exports);
 
 declare var  CDJoystick, interop;
 
-
-class TrackingHandlerImpl extends NSObject {
-    private _owner: WeakRef<any>;
-
-    public static initWithOwner(owner: WeakRef<any>): TrackingHandlerImpl {
-        let handler = <TrackingHandlerImpl>TrackingHandlerImpl.new();
-        handler._owner = owner;
-        return handler;
-    }
-
-    public trackingHandler(args) {
-        let owner = this._owner.get();
-        if (owner) {
-            console.log("Track");
-            //owner._emit(common.Button.tapEvent);
-        }
-    }
-
-    public static ObjCExposedMethods = {
-        "trackingHandler": { returns: interop.types.void, params: [interop.types.id] }
-    };
-}
-
-
 export class JoyStick extends JoyStickCommon {
     private _ios: any = null;
-    private measuredWidth: number = 0;
 
     get ios(): any {
         return this._ios;
@@ -43,12 +19,6 @@ export class JoyStick extends JoyStickCommon {
     get _nativeView(): any {
         if(!this._ios)
             this._createUI();
-
-        if(this.getMeasuredWidth() > this.measuredWidth) {
-            this.measuredWidth = this.getMeasuredWidth();
-
-            this.updateSize(this.measuredWidth);
-        }
 
         return this._ios;
     }
@@ -69,36 +39,49 @@ export class JoyStick extends JoyStickCommon {
         joystick.stickBorderWidth = 2.0;
         joystick.fade = 0.5;
 
-        // joystick.trackingHandler = (jdata) => {
-        //     console.log("tracking");
-        // };
+        joystick.trackingHandler = (joystickNativeData) => {
+            //Parse the attributes
+            var nspointstr = joystickNativeData.valueForKey("velocity").toString();
 
-        joystick.trackingHandler = TrackingHandlerImpl.initWithOwner(new WeakRef(this));
+            var charPos0 = nspointstr.indexOf("{")+1;
+            var charPos1 = nspointstr.indexOf(",");
+            var charPos2 = nspointstr.indexOf("}");
 
-        setTimeout( ()=> {
-            debugger;
-            console.log("Here");
-            var js = this._ios;
-            joystick.listen();
-        }, 2000);
+            var x = nspointstr.substring( nspointstr.indexOf("{")+1, nspointstr.indexOf(",") );
+            var y = nspointstr.substring( nspointstr.indexOf(",")+2, nspointstr.indexOf("}") );
+
+            // Update the observable attributes
+            this.updateAttributes(x, y);
+        }
     }
 
-    private updateAngle(angleRad) {
-        if(angleRad === 0) {
-            this.set("horizontal", 0);
-            this.set("vertical", 0);
-            this.set("angle", 0);
-            this.set("power", 0);
-        }
-        else {
-            var horizontal = Math.cos(angleRad) * 100;
-            var vertical = -Math.sin(angleRad) * 100;
+    public onMeasure(widthMeasureSpec: number, heightMeasureSpec: number): void {
+        var width = utils.layout.getMeasureSpecSize(widthMeasureSpec);
+        var height = utils.layout.getMeasureSpecSize(heightMeasureSpec);
 
-            this.set("horizontal", horizontal);
-            this.set("vertical", vertical);
-            this.set("angle", angleRad *180/Math.PI);
-            this.set("power", 100);
-        }
+        var size = Math.min(width, height);
+
+        this.updateSize(size);
+        this.setMeasuredDimension(size, size);
+    }
+
+    private updateAttributes(x: number, y: number) {
+        this.set("horizontal", x);
+        this.set("vertical", y);
+
+        var power = this.calculatePower(x, y);
+        this.set("power", power);
+
+        var angle = this.calculateAngle(x, y);
+        this.set("angle", angle);
+    }
+
+    private calculatePower(x, y): number {
+        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+    }
+
+    private calculateAngle(x: number, y: number): number {
+        return Math.atan2(-y, -x) * 180 / Math.PI;
     }
 
     public updatePadColor(color: Color) {
