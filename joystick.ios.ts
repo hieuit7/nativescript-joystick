@@ -77,7 +77,8 @@ export class JoyStick extends JoyStickCommon {
     }
 
     private calculatePower(x, y): number {
-        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+        var power = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+        return (power > 100) ? 100 : power;
     }
 
     private calculateAngle(x: number, y: number): number {
