@@ -2,8 +2,8 @@ import { Color } from "color";
 import { JoyStickCommon } from './joystick.common';
 export declare class JoyStick extends JoyStickCommon {
     private _ios;
-    ios: any;
-    _nativeView: any;
+    readonly ios: any;
+    readonly _nativeView: any;
     _createUI(): void;
     onMeasure(widthMeasureSpec: number, heightMeasureSpec: number): void;
     private updateAttributes(x, y);
