@@ -8,10 +8,7 @@
         "declaration": true
     },
     "files": [
-      "node_modules/tns-core-modules/tns-core-modules.d.ts",
-      "node_modules/tns-platform-declarations/tns-core-modules/android17.d.ts",
-      "node_modules/tns-platform-declarations/tns-core-modules/ios.d.ts",
-      "node_modules/tns-platform-declarations/tns-core-modules/org.nativescript.widgets.d.ts",
+      "node_modules/tns-core-modules/tns-core-modules.d.ts",ß
       "joystick.common.ts",
       "joystick.android.ts", 
       "joystick.ios.ts"
