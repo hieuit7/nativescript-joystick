@@ -41,15 +41,8 @@ export class JoyStick extends JoyStickCommon {
 
         joystick.trackingHandler = (joystickNativeData) => {
             //Parse the attributes
-            var nspointstr = joystickNativeData.valueForKey("velocity").toString();
-
-            var charPos0 = nspointstr.indexOf("{")+1;
-            var charPos1 = nspointstr.indexOf(",");
-            var charPos2 = nspointstr.indexOf("}");
-
-            var x = nspointstr.substring( nspointstr.indexOf("{")+1, nspointstr.indexOf(",") );
-            var y = nspointstr.substring( nspointstr.indexOf(",")+2, nspointstr.indexOf("}") );
-
+            var x = joystickNativeData.valueForKey("x");
+            var y = joystickNativeData.valueForKey("y");
             // Update the observable attributes
             this.updateAttributes(x, -y);
         }
