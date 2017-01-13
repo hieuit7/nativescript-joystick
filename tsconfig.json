@@ -8,7 +8,7 @@
         "declaration": true
     },
     "files": [
-      "node_modules/tns-core-modules/tns-core-modules.d.ts",ß
+      "node_modules/tns-core-modules/tns-core-modules.d.ts",
       "joystick.common.ts",
       "joystick.android.ts", 
       "joystick.ios.ts"
