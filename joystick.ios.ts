@@ -10,7 +10,7 @@ import {
     powerProperty
 } from './joystick.common';
 
-declare var CCDJoystick, CGRectMake, CGSizeMake;
+declare var CDJoystick, CGRectMake, CGSizeMake;
 
 export class JoyStick extends JoyStickCommon {
     private _ios: any = null;
@@ -22,7 +22,7 @@ export class JoyStick extends JoyStickCommon {
     public createNativeView() {
         let size = 200;
 
-        let joystick = new CCDJoystick();
+        let joystick = new CDJoystick();
         this._ios = joystick;
 
         joystick.frame = CGRectMake(0, 0, size, size);
@@ -37,8 +37,8 @@ export class JoyStick extends JoyStickCommon {
 
         joystick.trackingHandler = (joystickNativeData) => {
             //Parse the attributes
-            var x = joystickNativeData.valueForKey("x");
-            var y = joystickNativeData.valueForKey("y");
+            let x = joystickNativeData.valueForKey("x");
+            let y = joystickNativeData.valueForKey("y");
             // Update the observable attributes
             this.updateAttributes(x, -y);
         }
@@ -87,7 +87,7 @@ export class JoyStick extends JoyStickCommon {
 
     public updateSize(size) {
         this.ios.frame = CGRectMake(0, 0, size, size);
-        this.ios.stickSize = CGSizeMake(size / 2, size / 2);
+        this.ios.stickSize = CGSizeMake(size/2, size/2);
 
         this.width = size;
         this.height = size;
@@ -96,7 +96,7 @@ export class JoyStick extends JoyStickCommon {
     // padColorProperty property
     [padColorProperty.setNative](newValue: any) {
         if (Color.isValid(newValue)) {
-            var iosColor = newValue.ios;
+            let iosColor = newValue.ios;
             this.updatePadColor(iosColor);
         } else {
             console.log("The PadColor Property: " + newValue + " is invalid.");
