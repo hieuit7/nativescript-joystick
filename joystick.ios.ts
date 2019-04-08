@@ -1,13 +1,16 @@
-import {Color} from "color";
-import {PropertyMetadata} from "ui/core/proxy";
-import utils = require("utils/utils");
-import {View} from "ui/core/view";
+import { Color } from "tns-core-modules/color";
+import { layout } from "tns-core-modules/utils/utils";
+import {
+    JoyStickCommon,
+    padColorProperty,
+    buttonColorProperty,
+    horizontalProperty,
+    verticalProperty,
+    angleProperty,
+    powerProperty
+} from './joystick.common';
 
-import {JoyStickCommon} from './joystick.common';
-import common = require("./joystick.common");
-global.moduleMerge(common, exports);
-
-declare var  CCDJoystick, interop, CGRectMake, CGSizeMake;
+declare var CCDJoystick, CGRectMake, CGSizeMake;
 
 export class JoyStick extends JoyStickCommon {
     private _ios: any = null;
@@ -16,24 +19,17 @@ export class JoyStick extends JoyStickCommon {
         return this._ios;
     }
 
-    get _nativeView(): any {
-        if(!this._ios)
-            this._createUI();
+    public createNativeView() {
+        let size = 200;
 
-        return this._ios;
-    }
-
-    public _createUI() {
-        var size = 200;
-
-        var joystick = new CCDJoystick();
+        let joystick = new CCDJoystick();
         this._ios = joystick;
 
         joystick.frame = CGRectMake(0, 0, size, size);
         joystick.backgroundColor = new Color("White").ios;
         joystick.substrateBorderColor = new Color("Gray").ios;
         joystick.substrateBorderWidth = 1.0;
-        joystick.stickSize = CGSizeMake(size/2, size/2);
+        joystick.stickSize = CGSizeMake(size / 2, size / 2);
         joystick.stickColor = new Color("Red").ios;
         joystick.stickBorderColor = new Color("Black").ios;
         joystick.stickBorderWidth = 2.0;
@@ -46,31 +42,33 @@ export class JoyStick extends JoyStickCommon {
             // Update the observable attributes
             this.updateAttributes(x, -y);
         }
+
+        return this._ios;
     }
 
     public onMeasure(widthMeasureSpec: number, heightMeasureSpec: number): void {
-        var width = utils.layout.getMeasureSpecSize(widthMeasureSpec);
-        var height = utils.layout.getMeasureSpecSize(heightMeasureSpec);
+        let width = layout.getMeasureSpecSize(widthMeasureSpec);
+        let height = layout.getMeasureSpecSize(heightMeasureSpec);
 
-        var size = Math.min(width, height);
+        let size = Math.min(width, height);
 
         this.updateSize(size);
         this.setMeasuredDimension(size, size);
     }
 
     private updateAttributes(x: number, y: number) {
-        this.set("horizontal", x);
-        this.set("vertical", y);
+        let angle = this.calculateAngle(x, y);
+        angleProperty.nativeValueChange(this, angle);
 
-        var power = this.calculatePower(x, y);
-        this.set("power", power);
+        let power = this.calculatePower(x, y);
+        powerProperty.nativeValueChange(this, power);
 
-        var angle = this.calculateAngle(x, y);
-        this.set("angle", angle);
+        horizontalProperty.nativeValueChange(this, x);
+        verticalProperty.nativeValueChange(this, y);
     }
 
     private calculatePower(x, y): number {
-        var power = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+        let power = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
         return (power > 1) ? 1 : power;
     }
 
@@ -79,43 +77,39 @@ export class JoyStick extends JoyStickCommon {
     }
 
     public updatePadColor(color: Color) {
-        this._ios.backgroundColor = color;
+        this.ios.backgroundColor = color;
 
     }
 
     public updateStickColor(color: Color) {
-        this._ios.stickColor = color;
+        this.ios.stickColor = color;
     }
 
     public updateSize(size) {
-        this._ios.frame = CGRectMake(0, 0, size, size);
-        this._ios.stickSize = CGSizeMake(size/2, size/2);
+        this.ios.frame = CGRectMake(0, 0, size, size);
+        this.ios.stickSize = CGSizeMake(size / 2, size / 2);
 
         this.width = size;
         this.height = size;
     }
-}
 
-//padColorProperty property
-function onPadColorPropertyPropertyChanged(data) {
-    if(Color.isValid(data.newValue)){
-        var mycomponent = data.object;
-        var iosColor = new Color(data.newValue).ios;
-        mycomponent.updatePadColor(iosColor);
-    } else {
-        console.log("The PadColor Property: " + data.newValue + " is invalid.");
+    // padColorProperty property
+    [padColorProperty.setNative](newValue: any) {
+        if (Color.isValid(newValue)) {
+            var iosColor = newValue.ios;
+            this.updatePadColor(iosColor);
+        } else {
+            console.log("The PadColor Property: " + newValue + " is invalid.");
+        }
+    }
+
+    // buttonColorProperty property
+    [buttonColorProperty.setNative](newValue: any) {
+        if (Color.isValid(newValue)) {
+            let iosColor = newValue.ios;
+            this.updateStickColor(iosColor);
+        } else {
+            console.log("The ButtonColor Property: " + newValue + " is invalid.");
+        }
     }
 }
-(<PropertyMetadata>common.JoyStickCommon.padColorProperty.metadata).onSetNativeValue = onPadColorPropertyPropertyChanged;
-
-//buttonColorProperty property
-function onButtonColorPropertyChanged(data) {
-    if(Color.isValid(data.newValue)){
-        var mycomponent = data.object;
-        var iosColor = new Color(data.newValue).ios;
-        mycomponent.updateStickColor(iosColor);
-    } else {
-        console.log("The ButtonColor Property: " + data.newValue + " is invalid.");
-    }
-}
-(<PropertyMetadata>common.JoyStickCommon.buttonColorProperty.metadata).onSetNativeValue = onButtonColorPropertyChanged;
