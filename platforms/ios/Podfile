@@ -1,3 +1,4 @@
+    
 pod 'CCDJoystick', :git => 'https://github.com/tzraikov/CCDJoystick.git'
 post_install do |installer|
   installer.pods_project.targets.each do |target|

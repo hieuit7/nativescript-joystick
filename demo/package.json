@@ -9,7 +9,7 @@
     }
   },
   "dependencies": {
-    "nativescript-joystick": "../nativescript-joystick-0.4.4.tgz",
+    "nativescript-joystick": "../nativescript-joystick-0.5.0.tgz",
     "tns-core-modules": "^5.3.1"
   },
   "devDependencies": {
