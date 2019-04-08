@@ -1,6 +1,6 @@
 {
   "name": "nativescript-joystick",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "description": "NativeScript XML plugin to create native JoyStick widget.",
   "main": "joystick",
   "typings": "joystick.android.d.ts",
