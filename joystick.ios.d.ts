@@ -1,14 +1,13 @@
-import { Color } from "color";
+import { Color } from "tns-core-modules/color";
 import { JoyStickCommon } from './joystick.common';
 export declare class JoyStick extends JoyStickCommon {
     private _ios;
     readonly ios: any;
-    readonly _nativeView: any;
-    _createUI(): void;
+    createNativeView(): any;
     onMeasure(widthMeasureSpec: number, heightMeasureSpec: number): void;
-    private updateAttributes(x, y);
-    private calculatePower(x, y);
-    private calculateAngle(x, y);
+    private updateAttributes;
+    private calculatePower;
+    private calculateAngle;
     updatePadColor(color: Color): void;
     updateStickColor(color: Color): void;
     updateSize(size: any): void;

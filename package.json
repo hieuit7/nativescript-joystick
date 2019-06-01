@@ -1,13 +1,13 @@
 {
   "name": "nativescript-joystick",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "description": "NativeScript XML plugin to create native JoyStick widget.",
-  "main": "joystick.js",
+  "main": "joystick",
   "typings": "joystick.android.d.ts",
   "nativescript": {
     "platforms": {
-      "android": "2.4.1",
-      "ios": "2.4.0"
+      "android": "5.3.1",
+      "ios": "5.3.1"
     }
   },
   "scripts": {
@@ -35,15 +35,12 @@
   "bugs": {
     "url": "https://github.com/sebawita/nativescript-joystick/issues"
   },
-  "license": {
-    "type": "MIT",
-    "url": "https://github.com/sebawita/nativescript-joystick/blob/master/LICENSE"
-  },
+  "license": "MIT",
   "homepage": "https://github.com/sebawita/nativescript-joystick",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "tns-core-modules": "^2.4.4",
-    "tns-platform-declarations": "^2.4.4",
-    "typescript": "2.0.10"
+    "tns-core-modules": "^5.3.1",
+    "tns-platform-declarations": "^5.3.1",
+    "typescript": "3.1.1"
   }
 }

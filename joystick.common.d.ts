@@ -1,14 +1,16 @@
-import { Property } from "ui/core/dependency-observable";
-import { View } from "ui/core/view";
-import { Color } from "color";
+import { View } from "tns-core-modules/ui/core/view";
 export declare class JoyStickCommon extends View {
     angle: number;
     power: number;
     horizontal: number;
     vertical: number;
+    padColor: any;
+    buttonColor: any;
     constructor();
-    static padColorProperty: Property;
-    padColor: Color;
-    static buttonColorProperty: Property;
-    buttonColor: Color;
 }
+export declare const angleProperty: any;
+export declare const powerProperty: any;
+export declare const horizontalProperty: any;
+export declare const verticalProperty: any;
+export declare const padColorProperty: any;
+export declare const buttonColorProperty: any;

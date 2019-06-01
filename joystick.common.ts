@@ -1,65 +1,58 @@
-import {Property} from "ui/core/dependency-observable";
-import {View} from "ui/core/view";
-import {PropertyMetadata} from "ui/core/proxy";
-import {Color} from "color";
+import { Property, View } from "tns-core-modules/ui/core/view";
+import { Color } from "tns-core-modules/color";
 
-export class JoyStickCommon extends View{
-  public angle: number = 0;
-  public power: number = 0;
-  public horizontal: number = 0;
-  public vertical: number = 0;
+export class JoyStickCommon extends View {
+    public angle: number = 0;
+    public power: number = 0;
+    public horizontal: number = 0;
+    public vertical: number = 0;
+    public padColor: any;
+    public buttonColor: any;
 
-  constructor() {
-    super()
-  }
-
-  //padColor property
-  public static padColorProperty = new Property(
-      "padColor",
-      "JoyStickCommon",
-      new PropertyMetadata(false)
-  );
-  get padColor(): Color {
-      return this._getValue(JoyStickCommon.padColorProperty);
-  }
-  set padColor(value: Color) {
-      this._setValue(JoyStickCommon.padColorProperty, value);
-  }
-
-  //buttonColor property
-  public static buttonColorProperty = new Property(
-      "buttonColor",
-      "JoyStickCommon",
-      new PropertyMetadata(false)
-  );
-  public get buttonColor(): Color {
-      return this._getValue(JoyStickCommon.buttonColorProperty);
-  }
-  public set buttonColor(value: Color) {
-      this._setValue(JoyStickCommon.buttonColorProperty, value);
-  }
-
-  /*
-
-  //Set Background Image
-  joyStick.setPadBackground(resId);
-
-  //Set Button Image
-  joyStick.setButtonDrawable(resId);
-
-  //Set Button Scale
-  joyStick.setButtonRadiusScale(scale);
-
-  //Enable Button to Stay Put
-  joyStick.enableStayPut(enable);
-
-  //Set JoyStickListener
-  joyStick.setListener(this);
-
-  //JoyStickListener Interface
-  public interface JoyStickListener {
-          void onMove(JoyStick joyStick, double angle, double power);
-  }
-  */
+    constructor() {
+        super()
+    }
 }
+
+export const angleProperty = new Property<JoyStickCommon, number>({
+    name: 'angle',
+    defaultValue: undefined,
+    valueConverter: (value) => parseInt(value)
+});
+angleProperty.register(JoyStickCommon);
+
+export const powerProperty = new Property<JoyStickCommon, number>({
+    name: 'power',
+    defaultValue: undefined,
+    valueConverter: (value) => parseInt(value)
+});
+powerProperty.register(JoyStickCommon);
+
+export const horizontalProperty = new Property<JoyStickCommon, number>({
+    name: 'horizontal',
+    defaultValue: undefined,
+    valueConverter: (value) => parseInt(value)
+});
+horizontalProperty.register(JoyStickCommon);
+
+export const verticalProperty = new Property<JoyStickCommon, number>({
+    name: 'vertical',
+    defaultValue: undefined,
+    valueConverter: (value) => parseInt(value)
+});
+verticalProperty.register(JoyStickCommon);
+
+export const padColorProperty = new Property<JoyStickCommon, any>({
+    name: 'padColor',
+    defaultValue: undefined,
+    valueConverter: (value) => new Color(value)
+});
+padColorProperty.register(JoyStickCommon);
+
+export const buttonColorProperty = new Property<JoyStickCommon, any>({
+    name: 'buttonColor',
+    defaultValue: undefined,
+    valueConverter: (value) => new Color(value)
+});
+buttonColorProperty.register(JoyStickCommon);
 

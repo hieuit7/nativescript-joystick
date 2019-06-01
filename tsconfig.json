@@ -1,17 +1,32 @@
 {
-    "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "removeComments": false,
-        "experimentalDecorators": true,
-        "noEmitHelpers": true,
-        "declaration": true
-    },
-    "files": [
-      "node_modules/tns-core-modules/tns-core-modules.d.ts",
-      "joystick.common.ts",
-      "joystick.android.ts", 
-      "joystick.ios.ts"
-    ],
-    "compileOnSave": false
+  "compilerOptions": {
+      "noEmitHelpers": true,
+      "target": "es5",
+      "module": "commonjs",
+      "declaration": true,
+      "noImplicitAny": false,
+      "noImplicitUseStrict": true,
+      "experimentalDecorators": true,
+      "diagnostics": true,
+      "moduleResolution": "node",
+      "emitDecoratorMetadata": true,
+      "removeComments": false,
+      "noEmitOnError": false,
+      "noUnusedLocals": false,
+      "noUnusedParameters": false,
+      "lib": [
+          "es6",
+          "dom"
+      ]
+  },
+  "angularCompilerOptions": {
+      "genDir": ".",
+      "skipMetadataEmit": false,
+      "skipTemplateCodegen": true,
+      "debug": true
+  },
+  "exclude": [
+      "node_modules",
+      "node_modules/tns-platform-declarations"
+  ]
 }
